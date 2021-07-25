@@ -5,6 +5,8 @@ from keep_alive import keep_alive
 
 client = discord.Client()
 
+commandWord = ['$deposit', '$delete']
+
 def depositMsg(typeMsg,Dmsg):
   db[typeMsg] = Dmsg
 
@@ -34,8 +36,8 @@ async def on_message(message):
     keyDel = message.content.split()[1]
     del db[keyDel]
     await message.channel.send('Eliminate!')
-  #if str(message.channel) == 'ตู้เย็นผัม'and message.content.split()[0] == "$deposit" :
-    #await message.channel.purge(limit = 1)
+  if any(word in message.content for word in commandWord):
+        await message.delete()
 
 keep_alive()
 my_secret = os.environ['TOKEN']
