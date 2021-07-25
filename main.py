@@ -22,22 +22,23 @@ async def on_message(message):
     return
   if message.content.startswith('$hello'):
     await message.channel.send('Hello!')
-  if message.content.startswith('$deposit'):
+  if message.content.startswith('$deposit') and message.author.id == 689071825044373525 :
     typeMsg = message.content.split(" ", 2)[1]
     Dmsg = message.content.split(" ", 2)[2]
     depositMsg(typeMsg,Dmsg)
     await message.channel.send('I got it!')
-  if message.content.startswith('$print'):
+  if message.content.startswith('$print') and message.author.id == 689071825044373525:
     keys = db.keys()
     for x in keys:
       newMsg = x + "   " + db[x]
       await message.channel.send(newMsg)
-  if message.content.startswith('$delete'):  
+  if message.content.startswith('$delete') and message.author.id == 689071825044373525:  
     keyDel = message.content.split()[1]
     del db[keyDel]
     await message.channel.send('Eliminate!')
   if any(word in message.content for word in commandWord):
         await message.delete()
+
 
 keep_alive()
 my_secret = os.environ['TOKEN']
