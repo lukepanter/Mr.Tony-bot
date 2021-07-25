@@ -1,6 +1,7 @@
 import discord
 import os
 from replit import db
+from keep_alive import keep_alive
 
 client = discord.Client()
 
@@ -34,7 +35,7 @@ async def on_message(message):
     del db[keyDel]
     await message.channel.send('Eliminate!')
 
-
+keep_alive()
 my_secret = os.environ['TOKEN']
 client.run(my_secret)
 
