@@ -27,7 +27,13 @@ async def on_message(message):
     Dmsg = message.content.split(" ", 2)[2]
     depositMsg(typeMsg,Dmsg)
     await message.channel.send('I got it!')
+    await message.channel.purge(limit = 10)
+    keys = db.keys()
+    for x in keys:
+      newMsg = x + "   " + db[x]
+      await message.channel.send(newMsg)
   if message.content.startswith('$print') and message.author.id == 689071825044373525:
+    await message.channel.purge(limit = 10)
     keys = db.keys()
     for x in keys:
       newMsg = x + "   " + db[x]
@@ -38,7 +44,8 @@ async def on_message(message):
     await message.channel.send('Eliminate!')
   if any(word in message.content for word in commandWord):
         await message.delete()
-
+  if message.content.startswith('$clear') and message.author.id == 689071825044373525:
+    await message.channel.purge(limit = 10)
 
 keep_alive()
 my_secret = os.environ['TOKEN']
